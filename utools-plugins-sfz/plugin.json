@@ -1,0 +1,15 @@
+{
+	"pluginName": "身份证",
+	"description": "生成身份证号",
+	"main": "index.html",
+	"version": "0.0.1",
+	"logo": "logo.png",
+	"author": "jettHong",
+	"features": [
+		{
+		  "code": "sfz",
+		  "explain": "生成身份证号",
+			"cmds":["sfz","身份证"]
+		}
+	]
+}
