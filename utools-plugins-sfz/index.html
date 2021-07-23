@@ -1,4 +1,43 @@
 <script type="text/javascript">
+// 省市代码表
+var CITY_CODES = new Map();
+CITY_CODES.set("11", "北京");
+CITY_CODES.set("12", "天津");
+CITY_CODES.set("13", "河北");
+CITY_CODES.set("14", "山西");
+CITY_CODES.set("15", "内蒙古");
+CITY_CODES.set("21", "辽宁");
+CITY_CODES.set("22", "吉林");
+CITY_CODES.set("23", "黑龙江");
+CITY_CODES.set("31", "上海");
+CITY_CODES.set("32", "江苏");
+CITY_CODES.set("33", "浙江");
+CITY_CODES.set("34", "安徽");
+CITY_CODES.set("35", "福建");
+CITY_CODES.set("36", "江西");
+CITY_CODES.set("37", "山东");
+CITY_CODES.set("41", "河南");
+CITY_CODES.set("42", "湖北");
+CITY_CODES.set("43", "湖南");
+CITY_CODES.set("44", "广东");
+CITY_CODES.set("45", "广西");
+CITY_CODES.set("46", "海南");
+CITY_CODES.set("50", "重庆");
+CITY_CODES.set("51", "四川");
+CITY_CODES.set("52", "贵州");
+CITY_CODES.set("53", "云南");
+CITY_CODES.set("54", "西藏");
+CITY_CODES.set("61", "陕西");
+CITY_CODES.set("62", "甘肃");
+CITY_CODES.set("63", "青海");
+CITY_CODES.set("64", "宁夏");
+CITY_CODES.set("65", "新疆");
+CITY_CODES.set("71", "台湾");
+CITY_CODES.set("81", "香港");
+CITY_CODES.set("82", "澳门");
+CITY_CODES.set("91", "国外");
+
+
 // 生成随机数字，max限制最大值，base限制最小值
 function getRandom(max, base) { 
     return Math.floor(Math.random() * max + (base ? base : 0));
@@ -20,9 +59,12 @@ function cnNewID(idcard) {
 
 // 生成身份证号
 function getIdcard() {
+
     var idcard = '';
-    for(var i = 0; i < 18; i++) {
-        if(i < 6) {
+    for(var i = 1; i < 18; i++) {
+        if(i < 2) {
+            idcard += Array.from(CITY_CODES.keys())[getRandom(CITY_CODES.size-1)]; // 省市代码表
+        }else if(i < 6) {
             idcard += getRandom(10)
         }else if(i == 6) {
             idcard += getRandom(2, 1) //年份第一位仅支持1和2
