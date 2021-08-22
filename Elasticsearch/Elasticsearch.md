@@ -2,9 +2,13 @@
 
 Elasticsearch 是一个分布式、RESTful 风格的搜索和数据分析引擎，能够解决不断涌现出的各种用例。作为 Elastic Stack 的核心，它集中存储您的数据，帮助您发现意料之中以及意料之外的情况。
 
+- 基于 Apache Lucene 构建的开源搜索引|擎
+- 采用Java编写,提供简单易用的RESTFuI API
+- 轻松的横向扩展,可支持PB级的结构化或非结构化数据处理
+
 ## 1、下载&安装
 
-下载地址：[https://www.elastic.co/cn/downloads](https://www.elastic.co/cn/downloads/)
+**下载地址：**[https://www.elastic.co/cn/downloads](https://www.elastic.co/cn/downloads/)
 
 运行环境要求 JDK8 以后版本。
 
@@ -18,31 +22,38 @@ Elasticsearch 是一个分布式、RESTful 风格的搜索和数据分析引擎�
 | elasticsearch-service.bat remove  | 卸载     |
 | elasticsearch-service.bat manager | gui 管理 |
 
-**config 配置：**
+**配置**
+
+%elasticsearch_home%\config 目录下：
 
 jvm.options           ==> 配置 JVM，比如内存参数等。
 
 elasticsearch.yml  ==> 配置 Elasticsearch 信息，比如默认服务端口等。
-\# 允许跨域
-`http.cors.enabled: true`
-\#  Access-Control-Allow-Origin 响应头指定了该响应的资源是否被允许与给定的[origin](https://developer.mozilla.org/zh-CN/docs/Glossary/Origin)共享。
-`http.cors.allow-origin: "*"`
+
+```yaml
+# 允许跨域
+http.cors.enabled: true
+#  Access-Control-Allow-Origin 响应头指定了该响应的资源是否被允许与给定的[origin](https://developer.mozilla.org/zh-CN/docs/Glossary/Origin)共享。
+http.cors.allow-origin: "*"
+```
+
+
 
 ## 2、插件安装
 
-### elasticsearch-analysis-ik 分词器
+### elasticsearch-analysis-ik 分词器（推荐项）
 
-下载地址：[https://github.com/medcl/elasticsearch-analysis-ik](https://github.com/medcl/elasticsearch-analysis-ik)，注意与ES版本一致。
+下载地址：[https://github.com/medcl/elasticsearch-analysis-ik](https://github.com/medcl/elasticsearch-analysis-ik)，**注意与ES版本一致**。
 
 安装：解压到 %elasticsearch_home%\\plugins\ik 目录，ik为自己命名目录，重启ES生效。
 
 IK词库配置：%elasticsearch_home%\\plugins\ik\config\IKAnalyzer.cfg.xml
 
-### elasticsearch-head 管理端
+### elasticsearch-head 管理端（可选项）
 
 下载地址：[https://github.com/mobz/elasticsearch-head](https://github.com/mobz/elasticsearch-head)
 
-#### Running with built in server
+Running with built in server
 
 - `git clone git://github.com/mobz/elasticsearch-head.git`
 - `cd elasticsearch-head`
@@ -148,3 +159,16 @@ REF：
 [Spring Data Elasticsearch 用户指南 - 简书 (jianshu.com)](https://www.jianshu.com/p/27e1d583aafb)
 [Spring Data Elasticsearch_小试牛刀_JunsIr的技术栈-CSDN博客](https://blog.csdn.net/JunSIrhl/article/details/106067186)
 
+# **TODO：**
+
+物理设计
+
+节点、分片
+
+![image-20210731223512849](Elasticsearch-01.assets/image-20210731223512849.png)
+
+集群（cluster）、主节点（master）、脑裂（split brain）- `minimum_master_nodes=n` n大于1、选举
+
+集群名称、堆大小
+
+[ElasticSearch | ProcessOn免费在线作图,在线流程图,在线思维导图 |](https://www.processon.com/view/5f2ba7c5637689313abef450?fromnew=1)
