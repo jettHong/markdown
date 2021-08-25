@@ -8,13 +8,13 @@ Elasticsearch 是一个分布式、RESTful 风格的搜索和数据分析引擎�
 
 ## 1、下载&安装
 
-**下载地址：**[https://www.elastic.co/cn/downloads](https://www.elastic.co/cn/downloads/)
+下载地址：[https://www.elastic.co/cn/downloads](https://www.elastic.co/cn/downloads/)
 
 运行环境要求 JDK8 以后版本。
 
 解压后，运行 %elasticsearch_home%\bin\elasticsearch.bat，访问 http://localhost:9200 能正常打开。
 
-**win服务管理：**
+**win服务管理**
 
 | 命令                              | 描述     |
 | --------------------------------- | -------- |
@@ -35,13 +35,15 @@ elasticsearch.yml  ==> 配置 Elasticsearch 信息，比如默认服务端口等
 http.cors.enabled: true
 #  Access-Control-Allow-Origin 响应头指定了该响应的资源是否被允许与给定的[origin](https://developer.mozilla.org/zh-CN/docs/Glossary/Origin)共享。
 http.cors.allow-origin: "*"
+# 服务IP地址（一般绑定为内网IP，0.0.0.0在服务器的环境中指的就是服务器上所有的ipv4地址）
+network.host: 0.0.0.0
 ```
 
 
 
 ## 2、插件安装
 
-### elasticsearch-analysis-ik 分词器（推荐项）
+### 分词器-elasticsearch-analysis-ik（推荐项）
 
 下载地址：[https://github.com/medcl/elasticsearch-analysis-ik](https://github.com/medcl/elasticsearch-analysis-ik)，**注意与ES版本一致**。
 
@@ -49,7 +51,11 @@ http.cors.allow-origin: "*"
 
 IK词库配置：%elasticsearch_home%\\plugins\ik\config\IKAnalyzer.cfg.xml
 
-### elasticsearch-head 管理端（可选项）
+main.dic（主词典）、stopword.dic（停止词）。。。
+
+# elasticsearch-head（可选项）
+
+A web front end for an Elasticsearch cluster
 
 下载地址：[https://github.com/mobz/elasticsearch-head](https://github.com/mobz/elasticsearch-head)
 
@@ -67,7 +73,9 @@ Kibana 是一个免费且开放的用户界面，能够让您对 Elasticsearch �
 
 ![img](Elasticsearch.assets/illustrated-screenshot-hero-kibana.png)
 
-下载地址：[https://www.elastic.co/cn/downloads/kibana](https://www.elastic.co/cn/downloads/kibana)，注意与ES版本一致。
+#### 下载
+
+[https://www.elastic.co/cn/downloads/kibana](https://www.elastic.co/cn/downloads/kibana)，注意与ES版本一致。
 
 REF：
 
@@ -84,6 +92,8 @@ REF：
 | Lovelace[[1](https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/#_footnotedef_1)] | 3.1.x[[1](https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/#_footnotedef_1)] |     6.2.2     |      5.1.19      |    2.1.x    |
 | Kay[[1](https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/#_footnotedef_1)] | 3.0.x[[1](https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/#_footnotedef_1)] |     5.5.0     |      5.0.13      |    2.0.x    |
 | Ingalls[[1](https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/#_footnotedef_1)] | 2.1.x[[1](https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/#_footnotedef_1)] |     2.4.0     |      4.3.25      |    1.5.x    |
+
+如何查找匹配关系，打开依赖包 org.elasticsearch:elasticsearch 包中 META-INF，找到 X-Compile-Lucene-Version
 
 ![image-20210730104111065](Elasticsearch.assets/image-20210730104111065.png)
 
@@ -153,6 +163,10 @@ repository.search(queryBuilder)
 
 ```
 
+翻页功能：TODO
+
+高亮功能：TODO
+
 
 
 REF：
@@ -171,4 +185,4 @@ REF：
 
 集群名称、堆大小
 
-[ElasticSearch | ProcessOn免费在线作图,在线流程图,在线思维导图 |](https://www.processon.com/view/5f2ba7c5637689313abef450?fromnew=1)
+[ElasticSearch | ProcessOn 思维导图](https://www.processon.com/view/5f2ba7c5637689313abef450?fromnew=1)
