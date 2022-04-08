@@ -60,7 +60,7 @@ mysql命令状态下：
 ```mysql
 # 提示 ERROR 1819 (HY000): Your password does not satisfy the current policy requirements 时，
 # 可先执行如下脚本，再重新设置密码
-set global validate_password_policy=0
+set global validate_password_policy=0;
 set global validate_password_length=1;
 # 修改密码
 SET PASSWORD FOR 'root'@'localhost'= "新密码";
@@ -81,4 +81,7 @@ mysql> flush privileges;
 firewall-cmd --zone=public --add-port=3306/tcp --permanent
 ```
 
+6、调整配置
+
+配置文件默认路径：/etc/my.cnf
 
