@@ -26,6 +26,9 @@
    
    # 检查进程
    ps -ef|grep solr
+   
+   # 停止
+   ./solr stop
    ```
 
    
