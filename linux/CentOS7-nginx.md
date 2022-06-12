@@ -46,9 +46,11 @@ make && make install
 ```shell
 # 下面这段配置需要修整成单行
 ./configure 
+	--prefix=/usr/local/nginx
 	--sbin-path=/usr/local/nginx/nginx 
 	--conf-path=/usr/local/nginx/nginx.conf 
 	--pid-path=/usr/local/nginx/nginx.pid
+	--with-http_gzip_static_module
 make && make install
 ```
 
