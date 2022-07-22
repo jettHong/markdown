@@ -5,10 +5,11 @@
 ```shell
 # 列出原有安装包名
 rpm -qa|grep mariadb
+# 移除包
 rpm -e --nodeps 包名 # 好比 rpm -e --nodeps mariadb-libs-5.5.68-1.el7.x86_64
 # 同理，也一并检查 mysql
 rpm -qa|grep mysql
-rpm -e --nodeps 包名
+# 再次移除包
 
 # 删除其它配置文件
 rm -rf /etc/my.cnf
@@ -88,7 +89,7 @@ firewall-cmd --zone=public --add-port=3306/tcp --permanent
 
 6. 调整配置
 
-配置文件默认路径：/etc/my.cnf
+   配置文件默认路径：/etc/my.cnf
 
 7. 密码重置方法
 

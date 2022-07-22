@@ -21,7 +21,7 @@ yum -y install gcc zlib zlib-devel pcre pcre-devel openssl openssl-devel
 解压安装包
 
 ```shell
-tar xvf nginx-1.20.2.tar.gz
+tar -xvf nginx-1.20.2.tar.gz
 ```
 
 进入解压出来包目录中
@@ -46,11 +46,12 @@ make && make install
 ```shell
 # 下面这段配置需要修整成单行
 ./configure 
-	--prefix=/usr/local/nginx
-	--sbin-path=/usr/local/nginx/nginx 
+	--prefix=/usr/local/nginx 
+	--sbin-path=/usr/local/nginx/sbin/nginx 
 	--conf-path=/usr/local/nginx/nginx.conf 
-	--pid-path=/usr/local/nginx/nginx.pid
-	--with-http_gzip_static_module
+	--pid-path=/usr/local/nginx/nginx.pid 
+	--with-http_gzip_static_module 
+# 再执行
 make && make install
 ```
 

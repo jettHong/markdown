@@ -35,6 +35,10 @@
 
 3. 配置防火墙
 
+   ```bash
+   firewall-cmd --zone=public --add-port=8983/tcp --permanent
+   ```
+
    
 
 4. 设置自启动 TODO
@@ -48,3 +52,5 @@ REF：
 TODO [SOLR 5.0安装 使用内置脚本安装_Yang---的博客-CSDN博客](https://blog.csdn.net/u011513049/article/details/44887519)
 
 [Centos7下安装Solr服务和Solr基本用法 - 简书 (jianshu.com)](https://www.jianshu.com/p/46af12966ac5)
+
+[solr5.5.4直接部署Linux环境下 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/30734525)

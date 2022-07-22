@@ -1,6 +1,6 @@
 # Centos 7 yum源配置
 
-一、添加CD源（挂载 ISO 镜像）
+### 方法一：添加CD源（挂载 ISO 镜像）
 
 挂载光盘
 
@@ -28,9 +28,9 @@ enabled=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 ```
 
-二、添加163源
+### 方法二、添加163源
 
-### 使用说明
+使用说明
 
 首先备份/etc/yum.repos.d/CentOS-Base.repo
 
@@ -56,4 +56,3 @@ yum clean all
 yum makecache
 ```
 
-### 
