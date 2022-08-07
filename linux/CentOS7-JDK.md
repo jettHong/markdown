@@ -34,7 +34,7 @@ tar -xvf jdk-8u321-linux-x64.tar.gz -C /usr/local/java/
 3. 设置环境变量
 
 ```shell
-vim /etc/profile
+vi /etc/profile
 ```
 
 在文件尾部添加

@@ -27,23 +27,24 @@ rm -rf /var/lib/mysql/
 2. 安装
 
 ```shell
-# 解压
+# A解压
 tar -xvf mysql-5.7.36-1.el7.x86_64.rpm-bundle.tar
-# 按顺序安装
+# B.1方法一：按顺序安装（不方便需要考虑顺序）
 rpm -ivh mysql-community-common-5.7.36-1.el7.x86_64.rpm
 rpm -ivh mysql-community-libs-5.7.36-1.el7.x86_64.rpm
 rpm -ivh mysql-community-devel-5.7.36-1.el7.x86_64.rpm
 rpm -ivh mysql-community-libs-compat-5.7.36-1.el7.x86_64.rpm
 rpm -ivh mysql-community-client-5.7.36-1.el7.x86_64.rpm
 rpm -ivh mysql-community-server-5.7.36-1.el7.x86_64.rpm
-
+# B.2方法二：按移除不必要的文件，比如 *debug*、*test*等包后
+rpm -ivh mysql-community-*.rpm
 ```
 
 3. 启动服务
 
 ```shell
 # 自启动服务
-service enable mysqld
+systemctl enable mysqld
 # 启动服务
 systemctl start mysqld
 # 查看服务
@@ -111,3 +112,58 @@ firewall-cmd --zone=public --add-port=3306/tcp --permanent
    ```
 
    记得改回 my.cnf 配置，重启服务即可。
+
+# 使用方法安装 MySQL (Archived Versions)
+
+1. 下载
+
+   [MySQL :: Download MySQL Community Server (Archived Versions)](https://downloads.mysql.com/archives/community/)
+
+   Product Version:8.0.28
+   Operating System:Linux - Generic
+   OS Version:Linux - Generic (glibc 2.12) (x86, 64-bit)
+
+   **mysql-8.0.28-linux-glibc2.12-x86_64.tar.xz**
+
+2. 安装相关用户
+
+   ```sh
+   groupadd mysql
+   useradd -r -g mysql mysql 
+   chown -R mysql:mysql /usr/local/mysql
+   chmod -R 744         /usr/local/mysql
+   ```
+
+3. 解压创建相应数据目录
+
+   ```sh
+   vi my.cnf
+   ```
+
+   
+
+4. 初始化mysql
+
+   ```sh
+   ./mysqld --defaults-file=/etc/my.cnf --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data --user=mysql --initialize
+   ```
+
+   
+
+5. 自启动与服务
+
+   ```sh
+   # 配置自启动
+   cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysql
+   
+   # 启停命令
+   service mysql start
+   service mysql stop
+   
+   ln -s  /usr/local/mysql/bin/mysql    /usr/bin
+   ```
+
+   
+
+6. XXX
+
