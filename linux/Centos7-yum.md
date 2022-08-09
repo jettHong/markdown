@@ -28,7 +28,7 @@ enabled=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 ```
 
-### 方法二、添加163源
+### 方法二、添加外部源
 
 使用说明
 
@@ -44,15 +44,21 @@ mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
 - [CentOS6](http://mirrors.163.com/.help/CentOS6-Base-163.repo)
 - [CentOS5](http://mirrors.163.com/.help/CentOS5-Base-163.repo)
 
-```shell
+```sh
 cd /etc/yum.repos.d/
 wget http://mirrors.163.com/.help/CentOS7-Base-163.repo
 ```
 
 运行以下命令生成缓存
 
-```shell
+```sh
 yum clean all
 yum makecache
+```
+
+其它快捷方法
+
+```sh
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 ```
 
