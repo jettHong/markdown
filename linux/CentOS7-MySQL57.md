@@ -113,7 +113,7 @@ firewall-cmd --zone=public --add-port=3306/tcp --permanent
 
    记得改回 my.cnf 配置，重启服务即可。
 
-# 使用方法安装 MySQL (Archived Versions)
+# 使用通用二进制方法安装 MySQL (Archived Versions)
 
 1. 下载
 
@@ -137,18 +137,19 @@ firewall-cmd --zone=public --add-port=3306/tcp --permanent
 3. 解压创建相应数据目录
 
    ```sh
-   vi my.cnf
-   ```
-
+   tar -xvf mysql-8.0.28-linux-glibc2.12-x86_64.tar.xz
+   mv mysql-8.0.28-linux-glibc2.12-x86_64 mysql
+   vi /etc/my.cnf
+   # TODO 简要内容
    
+   
+   ```
 
 4. 初始化mysql
 
    ```sh
    ./mysqld --defaults-file=/etc/my.cnf --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data --user=mysql --initialize
    ```
-
-   
 
 5. 自启动与服务
 
@@ -163,7 +164,4 @@ firewall-cmd --zone=public --add-port=3306/tcp --permanent
    ln -s  /usr/local/mysql/bin/mysql    /usr/bin
    ```
 
-   
-
-6. XXX
-
+6. EOF

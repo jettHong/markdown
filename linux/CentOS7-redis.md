@@ -53,7 +53,7 @@
    maxmemory 2gb
    ```
 
-5. 设置自启动
+5. ~~（不需要）设置自启动~~
 
    编辑配置文件
 
@@ -96,14 +96,16 @@
 
 0. 官方下载
 
-   ```bash
-   wget https://download.redis.io/redis-stable.tar.gz
-   ```
+    ```bash
+    cd    /usr/local
+    wget https://download.redis.io/redis-stable.tar.gz
+    # http://download.redis.io/releases/redis-6.2.7.tar.gz
+    ```
 
 1. 安装依赖包
 
    ```bash
-   yum -y install gcc-c++
+   yum -y install gcc-c++ make python3
    ```
 
 2. 编译安装
@@ -115,23 +117,49 @@
    # 进入解压后目录
    cd redis-stable
    
-   # 
-   make
-   
    # 安装到编译成功的二进制文件到/usr/local/bin中
-   make PREFIX=/usr/local/redis install
+   mkdir /usr/local/redis
+   make &&  make PREFIX=/usr/local/redis install
+   
+   # 复制配置文件
+   cp /usr/local/redis-stable/redis.conf /etc/redis.conf
    ```
 
-3. XXXXXXXXX
+3. 配置自启动
 
-配置防火墙
+   ```sh
+   vi /etc/systemd/system/redis.service
+   
+   # ===== 输入以下信息
+   [Unit]
+   Description=Redis
+   After=network.target
+   
+   [Service]
+   Type=forking
+   ExecStart=/usr/local/redis/bin/redis-server /etc/redis.conf
+   ExecReload=/usr/local/redis/bin/redis-server -s reload
+   ExecStop=/usr/local/redis/bin/redis-server -s stop
+   PrivateTmp=true
+   
+   [Install]
+   WantedBy=multi-user.target
+   ```
 
-```bash
-firewall-cmd --zone=public --add-port=6379/tcp --permanent
+   
 
-# 重启防火墙以使配置即时生效
-systemctl restart firewalld
-```
+4. 配置防火墙
+
+   ```sh
+   firewall-cmd --zone=public --add-port=6379/tcp --permanent
+   
+   # 重启防火墙以使配置即时生效
+   systemctl restart firewalld
+   ```
+
+   
+
+5. EOF
 
 
 
