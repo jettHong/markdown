@@ -76,7 +76,7 @@
 
 4. 配置系统权限
 
-   SELinux
+   * SELinux
 
    ```sh
    # 查看权限
@@ -86,11 +86,11 @@
    sudo setsebool -P tftp_home_dir          1
    sudo setsebool -P allow_ftpd_full_access 1
    
-   # 无脑关闭
+   # 或者直接无脑关闭
    setenforce 0
    ```
 
-   防火墙
+   * 防火墙
 
    ```sh
    firewall-cmd --zone=public --add-port=30020/tcp --permanent
@@ -98,7 +98,7 @@
    systemctl restart firewalld
    ```
 
-   pam.d
+   * pam.d
 
    ```sh
    vi /etc/pam.d/vsftpd
