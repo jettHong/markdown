@@ -94,7 +94,7 @@
 
    ```sh
    firewall-cmd --zone=public --add-port=30020/tcp --permanent
-   firewall-cmd --zone=public --add-port=30030:30080/tcp --permanent
+   firewall-cmd --zone=public --add-port=30030-30080/tcp --permanent
    systemctl restart firewalld
    ```
 
