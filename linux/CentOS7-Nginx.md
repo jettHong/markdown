@@ -1,4 +1,4 @@
-# 1、下载
+1、下载
 
 [nginx: download](https://nginx.org/en/download.html)
 
