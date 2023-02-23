@@ -2,13 +2,13 @@
 
 0. 下载
 
-    官方地址：http://archive.apache.org/dist/activemq
+     官方地址：[ActiveMQ (apache.org)](https://activemq.apache.org/components/classic/download/)
 
-    ```shell
-    cd /usr/local/
-    # 这里使用支持JDK8版本的最新版本 （ActiveMQ 5.17 版本起需要 JDK11）
-    wget http://archive.apache.org/dist/activemq/5.16.4/apache-activemq-5.16.4-bin.tar.gz
-    ```
+     ```shell
+     cd /usr/local/
+     # 这里使用支持JDK8版本的最新版本 （ActiveMQ 5.17 版本起需要 JDK11）
+     wget http://archive.apache.org/dist/activemq/5.16.4/apache-activemq-5.16.4-bin.tar.gz
+     ```
 
 1. 解压
 
@@ -21,7 +21,7 @@
 
    
 
-2. 运行
+2. （可选）运行
 
    ```shell
    # 进入 activemq/bin 目录
@@ -39,9 +39,9 @@
 
    
 
-3. 调整内存参数
+3. 调整启动参数
 
-   内存配置文件
+   （可选）内存配置文件
 
    ```shell
    vi /usr/local/activemq/bin/env
@@ -71,21 +71,9 @@
    whereis java
    ```
 
-   查看编辑java的系统默认路径
-
-   ```shell
-   vi /etc/profile
-   
-   export JAVA_HOME=/usr/local/jdk1.8.0_321
-   export JRE_HOME=${JAVA_HOME}/jre
-   export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib:$CLASSPATH
-   export JAVA_PATH=${JAVA_HOME}/bin:${JRE_HOME}/bin
-   export PATH=$PATH:${JAVA_PATH}
-   ```
-
    
 
-4. 调整服务端口
+4. （可选）调整服务端口
 
    配置文件
 
@@ -93,28 +81,46 @@
    vi /usr/local/activemq/conf/activemq.xml
    ```
 
-   配置内容如下，将原来端口**61616**调整成46616
+   配置内容如下，将原来端口**61616**调整成**41616**
 
    ```xml
    <transportConnectors>
        <!-- DOS protection, limit concurrent connections to 1000 and frame size to 100MB -->
-       <transportConnector name="openwire" uri="tcp://0.0.0.0:46616?maximumConnections=1000&amp;wireFormat.maxFrameSize=104857600"/>
+       <transportConnector name="openwire" uri="tcp://0.0.0.0:41616?maximumConnections=1000&amp;wireFormat.maxFrameSize=104857600"/>
        # 省略
    </transportConnectors>
    ```
 
+   补充权限验证，在标签broker最后添加
+
+   ```xml
+   <plugins>
+     <simpleAuthenticationPlugin>
+   	<users>
+   	<authenticationUser username="admin" password="Syncsoft_3202" groups="users,admins"/>
+   	</users>
+     </simpleAuthenticationPlugin>
+   </plugins>
+   ```
+
+   调整web管理界面端口
+
+   修改配置文件<activemq_path>/conf/jetty.xml，找到`id="jettyPort"`项，将value值修改为默认的8161端口以外的其它端口，如48161，`<property name="port" value="48161"/>`。修改完成后保存并重启activemq服务。
+
+   
+
 5. 配置防火墙
 
-   Web管理平台，默认使用8161端口
+   Web管理平台，默认使用48161端口
 
    ```shell
-   firewall-cmd --zone=public --add-port=8161/tcp --permanent
+   firewall-cmd --zone=public --add-port=48161/tcp --permanent
    ```
 
    服务端口
 
    ```shell
-   firewall-cmd --zone=public --add-port=46616/tcp --permanent
+   firewall-cmd --zone=public --add-port=41616/tcp --permanent
    ```
 
    
